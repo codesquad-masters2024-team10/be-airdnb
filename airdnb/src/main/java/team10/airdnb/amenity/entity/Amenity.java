@@ -3,12 +3,7 @@ package team10.airdnb.amenity.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToMany;
-import org.springframework.data.annotation.Id;
-import team10.airdnb.accommodation.entity.Accommodation;
-
-import java.util.HashSet;
-import java.util.Set;
+import jakarta.persistence.Id;
 
 @Entity
 public class Amenity {
@@ -18,7 +13,5 @@ public class Amenity {
 
     private String name;
 
-    @ManyToMany(mappedBy = "amenities")
-    private Set<Accommodation> accommodations = new HashSet<>();
 }
 

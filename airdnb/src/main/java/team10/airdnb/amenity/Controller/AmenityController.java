@@ -25,10 +25,4 @@ public class AmenityController {
         return ResponseEntity.status(HttpStatus.CREATED).body(amenityService.createAmenity(amenity));
     }
 
-    // 특정 숙박 시설에 어메니티 추가 (PUT)
-    @PutMapping("/accommodations/{accommodationId}/amenities")
-    public ResponseEntity<Void> addAmenitiesToAccommodation(@PathVariable Long accommodationId, @RequestBody List<Long> amenityIds) {
-        amenityService.addAmenitiesToAccommodation(accommodationId, amenityIds);
-        return ResponseEntity.ok().build();
-    }
 }

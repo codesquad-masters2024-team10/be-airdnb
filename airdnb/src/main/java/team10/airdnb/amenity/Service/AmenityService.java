@@ -25,16 +25,5 @@ public class AmenityService {
         return amenityRepository.save(amenity);
     }
 
-    // 특정 숙박 시설에 여러 어메니티 추가
-    public void addAmenitiesToAccommodation(Long accommodationId, List<Long> amenityIds) {
-        Accommodation accommodation = accommodationRepository.findById(accommodationId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid accommodation ID"));
-        List<Amenity> amenities = amenityRepository.findAllById(amenityIds);
-        if (amenities.size() != amenityIds.size()) {
-            throw new IllegalArgumentException("One or more invalid amenity IDs");
-        }
 
-        accommodation.getAmenities().addAll(amenities);
-        accommodationRepository.save(accommodation);
-    }
 }
