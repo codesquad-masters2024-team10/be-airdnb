@@ -6,15 +6,58 @@
     let password = '';
     let isAuthCodeVisible = false;
   
-    function handleAuth() {
+    async function handleAuth() {
       if (email) {
-        isAuthCodeVisible = true;
+        try {
+          const response = await fetch('/api/admin/send-mail', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ adminId: email })
+          });
+  
+          if (!response.ok) {
+            throw new Error('Failed to send email');
+          }
+          isAuthCodeVisible = true;
+        } catch (error) {
+          console.error('Error sending email:', error);
+          alert('이메일 전송에 실패했습니다. 다시 시도해주세요.');
+        }
       }
     }
   
-    function handleRegister() {
-      // 회원가입 처리 로직
-      close();
+    async function handleRegister() {
+      if (email && authCode && password) {
+        try {
+          const response = await fetch('/api/admin', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              adminId: email,
+              authCode: authCode,
+              password: password
+            })
+          });
+  
+          if (response.ok) {
+            alert('회원가입이 성공적으로 완료되었습니다.');
+            close();
+          }
+          else{
+            const errorData = await response.json();
+            alert(errorData.errorMessage);
+          }
+        } catch (error) {
+          console.error('Error registering admin:', error);
+          alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+        }
+      } else {
+        alert('모든 필드를 입력해주세요.');
+      }
     }
   </script>
   
