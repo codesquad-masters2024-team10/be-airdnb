@@ -1,17 +1,18 @@
 <script>
-  import { format, differenceInDays } from 'date-fns';
+  import { format, differenceInDays } from 'date-fns'; // differenceInDays 추가
   import DatePickerComponent from './DatePickerComponent.svelte';
   import RatePopup from './RatePopup.svelte';
   import GuestPopup from './GuestPopup.svelte';
+  import { onMount } from 'svelte';
 
   export let checkIn;
   export let checkOut;
   export let selectedMinPrice = 100000;
   export let selectedMaxPrice = 1000000;
   export let totalGuests = 0;
+  export let state = false;
 
   let dateFormat = 'M월 d일';
-  let urlDateFormat = 'yyyy-MM-dd';
   let onDatePickerPopup = false;
   let onRatePopup = false;
   let onGuestPopup = false;
@@ -31,14 +32,10 @@
   };
 
   const formatDate = (dateString) => (dateString && format(new Date(dateString), dateFormat)) || '';
-  const formatUrlDate = (dateString) => (dateString && format(new Date(dateString), 'yyyy-MM-dd')) || '';
 
   $: formattedCheckIn = formatDate(checkIn);
   $: formattedCheckOut = formatDate(checkOut);
-  $: formattedDates = formattedCheckIn && formattedCheckOut ? `${formattedCheckIn} - ${formattedCheckOut}` : '일정 입력';
-
-  $: urlFormmattedCheckIn = formatUrlDate(checkIn);
-  $: urlFormmattedCheckOut = formatUrlDate(checkOut);
+  $: formattedDates = state ? '언제든지' : (formattedCheckIn && formattedCheckOut ? `${formattedCheckIn} - ${formattedCheckOut}` : '일정 입력');
 
   const handleDateSelected = (e) => {
     const { startDate, endDate } = e.detail;
@@ -59,9 +56,9 @@
   };
 
   const handleSearch = () => {
-    const checkInDate = urlFormmattedCheckIn;
-    const checkOutDate = urlFormmattedCheckOut;
-    const length = differenceInDays(new Date(checkOut), new Date(checkIn));
+    const checkInDate = checkIn ? format(new Date(checkIn), 'yyyy-MM-dd') : '';
+    const checkOutDate = checkOut ? format(new Date(checkOut), 'yyyy-MM-dd') : '';
+    const length = checkIn && checkOut ? differenceInDays(new Date(checkOut), new Date(checkIn)) : 0;
     const url = `/accommodations?checkin=${checkInDate}&checkout=${checkOutDate}&length=${length}&capacity=${totalGuests}&price_min=${selectedMinPrice}&price_max=${selectedMaxPrice}`;
     window.location.href = url;
   };

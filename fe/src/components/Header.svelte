@@ -50,7 +50,7 @@
         <button class="text-xl text-black bg-transparent hover:font-bold hover:underline transition duration-300">온라인 체험</button>
       {/if}
       {#if showMiniSearchBar}
-        <MiniSearchBar bind:checkIn={checkIn} bind:checkOut={checkOut} bind:selectedMinPrice={selectedMinPrice} bind:selectedMaxPrice={selectedMaxPrice} bind:totalGuests={totalGuests} />
+        <MiniSearchBar bind:checkIn={checkIn} bind:checkOut={checkOut} bind:selectedMinPrice={selectedMinPrice} bind:selectedMaxPrice={selectedMaxPrice} bind:totalGuests={totalGuests} {state} />
       {/if}
     </div>
 
