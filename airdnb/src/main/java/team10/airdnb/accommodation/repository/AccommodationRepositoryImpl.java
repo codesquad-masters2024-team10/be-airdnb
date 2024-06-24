@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import team10.airdnb.accommodation.controller.request.SearchAccommodationRequest;
 import team10.airdnb.accommodation.entity.Accommodation;
 import team10.airdnb.accommodation.entity.embedded.QAccommodationFee;
-import team10.airdnb.accommodation.util.BigDecimalUtils;
+import team10.airdnb.utils.BigDecimalUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

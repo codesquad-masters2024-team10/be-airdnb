@@ -1,4 +1,4 @@
-package team10.airdnb.accommodation.util;
+package team10.airdnb.utils;
 
 import java.math.BigDecimal;
 
