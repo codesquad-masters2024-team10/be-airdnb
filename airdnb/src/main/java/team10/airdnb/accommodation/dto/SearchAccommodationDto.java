@@ -16,7 +16,7 @@ public record SearchAccommodationDto(
         RoomInfo roomInfo,
         Address address,
         Coordinate coordinate,
-        Long maxCapacity
+        Integer maxCapacity
 ) {
     public static SearchAccommodationDto from(Accommodation accommodation) {
         return new SearchAccommodationDto(
