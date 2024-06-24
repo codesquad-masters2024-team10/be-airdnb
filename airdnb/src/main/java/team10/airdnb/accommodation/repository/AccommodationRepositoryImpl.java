@@ -10,13 +10,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import team10.airdnb.accommodation.controller.request.SearchAccommodationRequest;
 import team10.airdnb.accommodation.entity.Accommodation;
-import team10.airdnb.accommodation.entity.QAccommodation;
 import team10.airdnb.accommodation.entity.embedded.QAccommodationFee;
-import team10.airdnb.reservation.entity.QReservation;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+
+import static team10.airdnb.accommodation.entity.QAccommodation.*;
+import static team10.airdnb.reservation.entity.QReservation.*;
 
 @Repository
 @RequiredArgsConstructor
@@ -26,9 +27,7 @@ public class AccommodationRepositoryImpl implements AccommodationRepositoryCusto
 
     @Override
     public Page<Accommodation> findAvailableAccommodations(SearchAccommodationRequest request, Pageable pageable) {
-        QAccommodation accommodation = QAccommodation.accommodation;
         QAccommodationFee accommodationFee = accommodation.accommodationFee;
-        QReservation reservation = QReservation.reservation;
 
         // 동적으로 where절 생성
         BooleanBuilder builder = new BooleanBuilder();
