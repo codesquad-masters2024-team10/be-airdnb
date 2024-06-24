@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import team10.airdnb.accommodation.controller.request.SearchAccommodationRequest;
 import team10.airdnb.accommodation.entity.Accommodation;
 import team10.airdnb.accommodation.entity.embedded.QAccommodationFee;
+import team10.airdnb.accommodation.util.BigDecimalUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -41,11 +42,10 @@ public class AccommodationRepositoryImpl implements AccommodationRepositoryCusto
         if (capacity != null && capacity > 0) {
             builder.and(accommodation.maxCapacity.goe(capacity));
         }
-
-        if (minDayRate != null && minDayRate.compareTo(BigDecimal.ZERO) > 0) {
+        if (BigDecimalUtils.isGreaterThan(minDayRate, BigDecimal.ZERO)) {
             builder.and(accommodationFee.dayRate.goe(minDayRate));
         }
-        if (maxDayRate != null && maxDayRate.compareTo(BigDecimal.ZERO) > 0) {
+        if (BigDecimalUtils.isGreaterThan(maxDayRate, BigDecimal.ZERO)) {
             builder.and(accommodationFee.dayRate.loe(maxDayRate));
         }
 
