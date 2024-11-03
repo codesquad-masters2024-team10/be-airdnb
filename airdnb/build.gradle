@@ -42,7 +42,10 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
     implementation 'org.springframework.boot:spring-boot-starter-mail'      // java mail 의존성 추가
+    
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'// redis 의존성 추가
+    implementation 'org.redisson:redisson-spring-boot-starter:3.18.0'       // redisson 추가
+
 
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'    // oauth
 
