@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import team10.airdnb.accommodation.entity.Accommodation;
 import team10.airdnb.accommodation.exception.AccommodationIdNotFoundException;
 import team10.airdnb.accommodation.repository.AccommodationRepository;
+import team10.airdnb.global.distributedlock.DistributedLock;
 import team10.airdnb.jwt.service.TokenManager;
 import team10.airdnb.member.entity.Member;
 import team10.airdnb.member.exception.MemberIdNotFoundException;
@@ -47,7 +48,7 @@ public class ReservationService {
         return ReservationInformationResponse.from(reservation);
     }
 
-    @Transactional(isolation = Isolation.READ_COMMITTED)
+    @DistributedLock(key = "#request.accommodationId()")
     public ReservationSummaryResponse createReservation(ReservationCreateRequest request, String authorizationHeader) {
         validateReservationAvailable(request); // 중복 체크
 
