@@ -1,4 +1,4 @@
-package team10.airdnb.config.global;
+package team10.airdnb.global.config.global;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

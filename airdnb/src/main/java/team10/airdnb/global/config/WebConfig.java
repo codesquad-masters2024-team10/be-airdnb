@@ -1,4 +1,4 @@
-package team10.airdnb.config;
+package team10.airdnb.global.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

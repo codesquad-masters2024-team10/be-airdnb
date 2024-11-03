@@ -1,4 +1,4 @@
-package team10.airdnb.config.email;
+package team10.airdnb.global.config.email;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

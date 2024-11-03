@@ -1,4 +1,4 @@
-package team10.airdnb.config.feign;
+package team10.airdnb.global.config.feign;
 
 import feign.Logger;
 import feign.Retryer;

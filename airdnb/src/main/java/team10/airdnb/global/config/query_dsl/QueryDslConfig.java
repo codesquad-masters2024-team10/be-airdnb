@@ -1,4 +1,4 @@
-package team10.airdnb.config.query_dsl;
+package team10.airdnb.global.config.query_dsl;
 
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
