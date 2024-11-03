@@ -2,11 +2,8 @@ package team10.airdnb.reservation.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import jakarta.persistence.LockModeType;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Repository;
-import team10.airdnb.accommodation.entity.QAccommodation;
 import team10.airdnb.reservation.dto.ReservationAccommodationDto;
 
 import java.time.LocalDate;
@@ -22,10 +19,9 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
     public boolean isDateRangeAvailable(Long accommodationId, LocalDate checkInDate, LocalDate checkOutDate) {
 
-        boolean exists = queryFactory.selectFrom(reservation)
+        return queryFactory.selectFrom(reservation)
                 .where(
                         reservation.accommodation.id.eq(accommodationId)
                                 .and(
@@ -39,9 +35,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom {
                                         reservation.checkOutDate.ne(checkInDate)
                                 )
                 )
-                .fetchCount() > 0;
-
-        return !exists;
+                .fetch().isEmpty();
 
     }
 
